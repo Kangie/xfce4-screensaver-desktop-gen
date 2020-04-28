@@ -1,6 +1,6 @@
 # xfce4-screensaver-desktop-gen.py
 # Generates .desktop entries from xscreensaver xml config files. 
-# Allows Allows xfce4-screensaver (and probably MATE and GNOME screensavers) to use xscreensaver screensavers.
+# Allows xfce4-screensaver (and probably MATE and GNOME screensavers) to use xscreensaver screensavers.
 
 # Copyright (C) Matt J (Kangie@footclan.ninja), 2020.
 
