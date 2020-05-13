@@ -50,7 +50,8 @@ if args.inputfile:
 		file.write("Exec=/usr/lib64/misc/xscreensaver/{}\n".format(obj.screensaver['name']))
 	file.write("TryExec=/usr/lib64/misc/xscreensaver/{}\n".format(obj.screensaver['name']))
 	file.write("Categories=Screensaver;\n")
-	file.close()
+	file.write("NoDisplay=true\n")
+        file.close()
 
 else:
 	path='/usr/share/xscreensaver/config'
@@ -70,4 +71,5 @@ else:
 			file.write("Exec=/usr/lib64/misc/xscreensaver/{}\n".format(obj.screensaver['name']))
 		file.write("TryExec=/usr/lib64/misc/xscreensaver/{}\n".format(obj.screensaver['name']))
 		file.write("Categories=Screensaver;\n")
+                file.write("NoDisplay=true\n")
 		file.close()
