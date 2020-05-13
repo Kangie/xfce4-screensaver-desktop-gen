@@ -26,50 +26,50 @@ import untangle
 import glob
 
 parser=argparse.ArgumentParser(description='Tool to generate .desktop entries from xscreensaver xml config files. Allows xfce4-screensaver (and probably MATE and GNOME screensavers) to use xscreensaver screensavers.', 
-							  epilog='If run without arguments will parse the whole /usr/share/xscreensaver/config/ directory')
-parser.add_argument('--inputfile',metavar='Filename', 
-					type=str, help='input filename (xscreensaver xml)', required=False)
+        epilog='If run without arguments will parse the whole /usr/share/xscreensaver/config/ directory')
+parser.add_argument('--inputfile',metavar='Filename',
+        type=str, help='input filename (xscreensaver xml)', required=False)
 args=parser.parse_args()
 
 if args.inputfile:
-	# Parse xscreensaver config file
-	obj = untangle.parse(args.inputfile)
+        # Parse xscreensaver config file
+        obj = untangle.parse(args.inputfile)
 
-	# Set output filename and open file.
-	filename = '/usr/share/applications/screensavers/{}.desktop'.format(obj.screensaver['name'])
-	file = open(filename,"w")
+        # Set output filename and open file.
+        filename = '/usr/share/applications/screensavers/{}.desktop'.format(obj.screensaver['name'])
+        file = open(filename,"w")
 
-	# Write desktop entry.
-	print("Writing {}".format(filename))
-	file.write("[Desktop Entry]\n")
-	file.write("Type=Application\n")
-	file.write("Name={}\n".format(obj.screensaver['_label']))
-	if obj.screensaver.command['arg']:
-		file.write("Exec=/usr/lib64/misc/xscreensaver/{} {}\n".format(obj.screensaver['name'], obj.screensaver.command['arg']))
-	else:
-		file.write("Exec=/usr/lib64/misc/xscreensaver/{}\n".format(obj.screensaver['name']))
-	file.write("TryExec=/usr/lib64/misc/xscreensaver/{}\n".format(obj.screensaver['name']))
-	file.write("Categories=Screensaver;\n")
-	file.write("NoDisplay=true\n")
+        # Write desktop entry.
+        print("Writing {}".format(filename))
+        file.write("[Desktop Entry]\n")
+        file.write("Type=Application\n")
+        file.write("Name={}\n".format(obj.screensaver['_label']))
+        if obj.screensaver.command['arg']:
+                file.write("Exec=/usr/lib64/misc/xscreensaver/{} {}\n".format(obj.screensaver['name'], obj.screensaver.command['arg']))
+        else:
+                file.write("Exec=/usr/lib64/misc/xscreensaver/{}\n".format(obj.screensaver['name']))
+        file.write("TryExec=/usr/lib64/misc/xscreensaver/{}\n".format(obj.screensaver['name']))
+        file.write("Categories=Screensaver;\n")
+        file.write("NoDisplay=true\n")
         file.close()
 
 else:
-	path='/usr/share/xscreensaver/config'
-	configs=glob.glob(path + '/*.xml')
-	for st in configs:
-		obj=untangle.parse(st)
-		filename = '/usr/share/applications/screensavers/{}.desktop'.format(obj.screensaver['name'])
-		file = open(filename,"w")
-		# Write desktop entry.
-		print("Writing {}".format(filename))
-		file.write("[Desktop Entry]\n")
-		file.write("Type=Application\n")
-		file.write("Name={}\n".format(obj.screensaver['_label']))
-		if obj.screensaver.command['arg']:
-			file.write("Exec=/usr/lib64/misc/xscreensaver/{} {}\n".format(obj.screensaver['name'], obj.screensaver.command['arg']))
-		else:
-			file.write("Exec=/usr/lib64/misc/xscreensaver/{}\n".format(obj.screensaver['name']))
-		file.write("TryExec=/usr/lib64/misc/xscreensaver/{}\n".format(obj.screensaver['name']))
-		file.write("Categories=Screensaver;\n")
+        path='/usr/share/xscreensaver/config'
+        configs=glob.glob(path + '/*.xml')
+        for st in configs:
+                obj=untangle.parse(st)
+                filename = '/usr/share/applications/screensavers/{}.desktop'.format(obj.screensaver['name'])
+                file = open(filename,"w")
+                # Write desktop entry.
+                print("Writing {}".format(filename))
+                file.write("[Desktop Entry]\n")
+                file.write("Type=Application\n")
+                file.write("Name={}\n".format(obj.screensaver['_label']))
+                if obj.screensaver.command['arg']:
+                        file.write("Exec=/usr/lib64/misc/xscreensaver/{} {}\n".format(obj.screensaver['name'], obj.screensaver.command['arg']))
+                else:
+                        file.write("Exec=/usr/lib64/misc/xscreensaver/{}\n".format(obj.screensaver['name']))
+                file.write("TryExec=/usr/lib64/misc/xscreensaver/{}\n".format(obj.screensaver['name']))
+                file.write("Categories=Screensaver;\n")
                 file.write("NoDisplay=true\n")
-		file.close()
+                file.close()
